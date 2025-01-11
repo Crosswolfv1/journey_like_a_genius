@@ -7,7 +7,7 @@ RSpec.describe "Users", type: :request do
       user_2 = User.create!(name: "Jeremiah")
       user_3 = User.create!(name: "Joel")
 
-      user_path = get api_v1_users_path
+      get api_v1_users_path
 
       expect(response).to be_successful
       json = JSON.parse(response.body, symbolize_names: true)
