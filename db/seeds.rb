@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+user_1 = User.find_or_create_by!(name: "Alora")
+
+
+itinerary_1 = Itinerary.find_or_create_by!(city: "Paris", duration: "half", user_id: user_1.id)
+
+
+# For some reason the items in the seed file are being duplicated when you run rails db:seed. I'm not sure why
+item_1 = Item.find_or_create_by!(item_type: "activity", name: "Musée d'Orsay", address: "Esplanade Valéry Giscard d'Estaing, 75007 Paris, France", opening_hours: [
+ "Monday: Closed",
+ "Tuesday: 9:30 AM – 6:00 PM",
+ "Wednesday: 9:30 AM – 6:00 PM",
+ "Thursday: 9:30 AM – 6:00 PM",
+ "Friday: 9:30 AM – 6:00 PM",
+ "Saturday: 9:30 AM – 6:00 PM",
+ "Sunday: 9:30 AM – 6:00 PM"
+], phone: "+33 1 40 49 48 14")
