@@ -7,7 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-user_1 = User.find_or_create_by!(name: "Alora")
+user_1 = User.create!(name: "Alora")
+user_2 = User.create!(name: "Jeremiah")
+user_3 = User.create!(name: "Joel")
+user_4 = User.create!(name: "James")
+user_5 = User.create!(name: "Guest")
 
 
 itinerary_1 = Itinerary.find_or_create_by!(city: "Paris", duration: "half", user_id: user_1.id)
