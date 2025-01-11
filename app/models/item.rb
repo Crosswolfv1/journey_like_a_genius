@@ -1,5 +1,6 @@
 class Item < ApplicationRecord
-  # has_many :itineraries, through :itinerary_items
+  has_many :item_itineraries
+  has_many :itineraries, through: :item_itineraries
   validates :item_type, presence: true
   validates :name, presence: true
   validates :address, presence: true
