@@ -21,4 +21,21 @@ RSpec.describe "Itineraries", type: :request do
       expect(json[:data][0][:attributes]).to have_key(:user_id)
     end
   end
+  
+  describe "Create an Itinerary Endpoint" do
+    it "can create an itinerary" do
+      user_3 = User.create!(name: "Joel")
+
+      itinerary_params = { itinerary: {city: "Tokyo", duration: "full", user_id: user_3.id } }
+
+      post api_v1_itineraries_path, params: itinerary_params
+      
+      expect(response).to be_successful
+      json = JSON.parse(response.body, symbolize_names: true)
+
+      expect(json[:data][:attributes][:city]).to eq("Tokyo")
+      expect(json[:data][:attributes][:duration]).to eq("full")
+      expect(json[:data][:attributes][:user_id]).to eq(user_3.id)
+    end
+  end
 end
