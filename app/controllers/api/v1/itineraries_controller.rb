@@ -7,7 +7,6 @@ class Api::V1::ItinerariesController < ApplicationController
   end
 
   def create
-    # binding.pry
     params[:itinerary][:user_id] = params[:itinerary][:user_id].to_i
     itinerary = Itinerary.new(itinerary_params)
     if itinerary.save
