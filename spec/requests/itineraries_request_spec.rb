@@ -33,9 +33,9 @@ RSpec.describe "Itineraries", type: :request do
       expect(response).to be_successful
       json = JSON.parse(response.body, symbolize_names: true)
 
-      expect(json[:data][:attributes][:city]).to eq("Tokyo")
-      expect(json[:data][:attributes][:duration]).to eq("full")
-      expect(json[:data][:attributes][:user_id]).to eq(user_3.id)
+      expect(json[:data][0][:attributes][:city]).to eq("Tokyo")
+      expect(json[:data][0][:attributes][:duration]).to eq("full")
+      expect(json[:data][0][:attributes][:user_id]).to eq(user_3.id)
     end
   end
 end
