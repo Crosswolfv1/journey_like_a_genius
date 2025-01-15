@@ -92,9 +92,6 @@ RSpec.describe "Itineraries", type: :request do
 
       itinerary = Itinerary.last
       expect(itinerary.items.count).to eq(2)
-
-      itinerary = Itinerary.last
-      expect(itinerary.items.count).to eq(2)
     
       expect(itinerary.items.first.item_type).to eq("activity")
       expect(itinerary.items.first.name).to eq("Tokyo Tower")

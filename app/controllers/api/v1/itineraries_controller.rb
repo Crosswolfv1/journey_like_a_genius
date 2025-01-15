@@ -9,7 +9,6 @@ class Api::V1::ItinerariesController < ApplicationController
   def create
     params[:itinerary][:user_id] = params[:itinerary][:user_id].to_i
     itinerary = Itinerary.new(itinerary_params)
-    # binding.pry
     if itinerary.save
       if params[:itinerary][:items].present? 
         params[:itinerary][:items].each do | item_data |
