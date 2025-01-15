@@ -9,8 +9,10 @@ class Api::V1::ItinerariesController < ApplicationController
   def create
     params[:itinerary][:user_id] = params[:itinerary][:user_id].to_i
     itinerary = Itinerary.new(itinerary_params)
+    # binding.pry
     if itinerary.save
-      if params[:itinerary][:items].each do | item_data |
+      if params[:itinerary][:items].present? 
+        params[:itinerary][:items].each do | item_data |
         item = Item.find_or_create_by(name: item_data[:name], address: item_data[:address]) do | new_item |
           new_item.item_type = item_data[:item_type]
           new_item.phone = item_data[:phone]
