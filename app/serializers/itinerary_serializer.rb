@@ -22,7 +22,10 @@ class ItinerarySerializer
                 end
             }
           }
-        end
+        end,
+        meta: {
+          your_itineraries: itineraries.count
+        }
     }
   end
 end
