@@ -12,6 +12,7 @@ user_2 = User.create!(name: "Jeremiah")
 user_3 = User.create!(name: "Joel")
 user_4 = User.create!(name: "James")
 user_5 = User.create!(name: "Guest")
+# user_1 = User.find_or_create_by!(name: "Guest")
 
 
 itinerary_1 = Itinerary.find_or_create_by!(city: "Paris", duration: "half", user_id: user_1.id)

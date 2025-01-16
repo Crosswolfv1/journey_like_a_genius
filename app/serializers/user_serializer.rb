@@ -13,4 +13,16 @@ class UserSerializer
         end
     }
   end
+
+  def self.format_user(user)
+    {data:
+      {
+        id: user.id.to_s,
+        type: "user",
+        attributes: {
+        name: user.name,
+            }
+          }
+  }
+  end
 end
