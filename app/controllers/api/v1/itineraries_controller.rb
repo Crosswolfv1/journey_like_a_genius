@@ -3,12 +3,12 @@ class Api::V1::ItinerariesController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    render json: ItinerarySerializer.format_itinerary_list(Itinerary.all), status: :ok
+    render json: ItinerarySerializer.format_itinerary_lists(Itinerary.all), status: :ok
   end
 
   def create
-    params[:itinerary][:user_id] = params[:itinerary][:user_id].to_i
     itinerary = Itinerary.new(itinerary_params)
+    itinerary.user_id = params[:user_id]
     if itinerary.save
       itinerary.add_items(params[:itinerary][:items]) if params[:itinerary][:items].present? 
       render json: ItinerarySerializer.format_itinerary_list([itinerary]), status: :ok
@@ -20,6 +20,6 @@ class Api::V1::ItinerariesController < ApplicationController
   private
   
   def itinerary_params
-    params.require(:itinerary).permit(:city, :duration, :user_id)
+    params.require(:itinerary).permit(:city, :duration)
   end
 end
