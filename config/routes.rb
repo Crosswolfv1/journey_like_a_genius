@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show]
-      resources :itineraries, only: [:index, :show, :create], param: :user_id
+      resources :itineraries, only: [:index, :show, :create], param: :user_id do
+        post '/', to: 'itineraries#create', as: 'create_itinerary'
+      end
       resources :items, only: [:index, :create]
     end
   end
