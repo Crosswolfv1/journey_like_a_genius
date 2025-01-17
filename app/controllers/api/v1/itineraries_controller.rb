@@ -7,11 +7,12 @@ class Api::V1::ItinerariesController < ApplicationController
   end
 
   def create
-    itinerary = Itinerary.new(itinerary_params)
-    itinerary.user_id = params[:user_id]
+    user = User.find_by(id: params[:itinerary_user_id])
+    itinerary = Itinerary.new(itinerary_params.except(:items))
+    itinerary.user_id = user.id
     if itinerary.save
-      itinerary.add_items(params[:itinerary][:items]) if params[:itinerary][:items].present? 
-      render json: ItinerarySerializer.format_itinerary_list([itinerary]), status: :ok
+      itinerary.add_items(itinerary_params[:items]) if itinerary_params[:items].present? 
+      render json: ItinerarySerializer.format_itinerary_list(itinerary), status: :ok
     else
       render json: { errors: itinerary.errors.full_messages }, status: :unprocessable_entity 
     end
@@ -20,6 +21,6 @@ class Api::V1::ItinerariesController < ApplicationController
   private
   
   def itinerary_params
-    params.require(:itinerary).permit(:city, :duration)
+    params.require(:itinerary).permit(:city, :duration, items: [:name, :address, :item_type, :phone, :opening_hours])
   end
 end
