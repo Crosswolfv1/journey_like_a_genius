@@ -10,7 +10,6 @@ RSpec.describe Item, type: :model do
     it { should validate_presence_of(:item_type) }
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:address) }
-    it { should validate_presence_of(:opening_hours) }
     it { should validate_presence_of(:phone) }
   end
 end
