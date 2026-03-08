@@ -7,24 +7,37 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-user_1 = User.create!(name: "Alora")
-user_2 = User.create!(name: "Jeremiah")
-user_3 = User.create!(name: "Joel")
-user_4 = User.create!(name: "James")
-user_5 = User.create!(name: "Guest")
-# user_1 = User.find_or_create_by!(name: "Guest")
+user_1 = User.find_or_create_by!(name: "Alora")
+user_2 = User.find_or_create_by!(name: "Jeremiah")
+user_3 = User.find_or_create_by!(name: "Joel")
+user_4 = User.find_or_create_by!(name: "James")
+user_5 = User.find_or_create_by!(name: "Guest")
 
+itinerary_1 = Itinerary.find_or_create_by!(
+  city: "Paris",
+  duration: "half",
+  user: user_1
+)
 
-itinerary_1 = Itinerary.find_or_create_by!(city: "Paris", duration: "half", user_id: user_1.id)
+item_1 = Item.find_or_create_by!(
+  item_type: "activity",
+  name: "Musée d'Orsay",
+  address: "Esplanade Valéry Giscard d'Estaing, 75007 Paris, France"
+) do |item|
+  item.opening_hours = [
+    "Monday: Closed",
+    "Tuesday: 9:30 AM – 6:00 PM",
+    "Wednesday: 9:30 AM – 6:00 PM",
+    "Thursday: 9:30 AM – 6:00 PM",
+    "Friday: 9:30 AM – 6:00 PM",
+    "Saturday: 9:30 AM – 6:00 PM",
+    "Sunday: 9:30 AM – 6:00 PM"
+  ]
+  item.phone = "+33 1 40 49 48 14"
+end
 
-
-# For some reason the items in the seed file are being duplicated when you run rails db:seed. I'm not sure why
-item_1 = Item.find_or_create_by!(item_type: "activity", name: "Musée d'Orsay", address: "Esplanade Valéry Giscard d'Estaing, 75007 Paris, France", opening_hours: [
- "Monday: Closed",
- "Tuesday: 9:30 AM – 6:00 PM",
- "Wednesday: 9:30 AM – 6:00 PM",
- "Thursday: 9:30 AM – 6:00 PM",
- "Friday: 9:30 AM – 6:00 PM",
- "Saturday: 9:30 AM – 6:00 PM",
- "Sunday: 9:30 AM – 6:00 PM"
-], phone: "+33 1 40 49 48 14")
+# Create the join record
+ItemItinerary.find_or_create_by!(
+  itinerary: itinerary_1,
+  item: item_1
+)
